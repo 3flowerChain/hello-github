@@ -1,11 +1,12 @@
-helloworld : helloworld.o test.o
-	g++ -o helloworld helloworld.o test.o
+object = helloworld.o test.o
+helloworld : $(object)
+	g++ -o helloworld $(object)
 
-helloworld.o : helloworld.cpp src/test.hpp
-	g++ -c helloworld.cpp
+helloworld.o : src/test.hpp
 
 test.o : src/test.cpp src/test.hpp
 	g++ -c src/test.cpp
 
+.PHONY : clean
 clean :
-	-rm helloworld.o test.o 
+	-rm helloworld $(object)
